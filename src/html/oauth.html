@@ -1,0 +1,20 @@
+<script type="module">
+    import http from "../modules/http.js";
+    import config from "../modules/config.js";
+    import { saveLoginToken } from "../modules/login.js";
+
+    http.get(`${config.users_api}/google/callback${location.search}&redirect_uri=${config.oauth_redirect_uri}`)
+        .then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    saveLoginToken(data.token);
+                    window.close();
+                });
+            } else {
+                window.close();
+            }
+        })
+        .catch(error => {
+            window.close();
+        });
+</script>

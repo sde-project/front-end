@@ -1,3 +1,6 @@
+import { sendFcmToken } from "../modules/cloud_messaging.js";
+
+
 // Initialize the Firebase app in the service worker by passing in
 // your app's Firebase config object.
 // https://firebase.google.com/docs/web/setup#config-object
@@ -17,6 +20,17 @@ const messaging = firebase.messaging();
 messaging.getToken({ vapidKey: 'BAw9DHrxvtsG52abLLvozOCuDBqeFxmyGFYDLwkeN7f_bRbgNcFFkTtyfMQx05tOWcesfzaRLqhLLL-krxaBcRg' }).then((currentToken) => {
   if (currentToken) {
     console.log("New token found! ", currentToken);
+
+    const oldToken = window.localStorage.getItem('fcmToken');
+    if(oldToken != currentToken) {
+      window.localStorage.setItem('fcmToken', currentToken);
+      window.localStorage.setItem('fcmTokenSent', 'false');
+    }
+
+    if(window.localStorage.getItem('loggedIn') == 'true') {
+      sendFcmToken(currentToken).catch(err => console.log(err));
+    }
+
   } else {
     // Show permission request UI
     console.log('No registration token available. Request permission to generate one.');
