@@ -36,10 +36,16 @@ export function getLatestCryptoNews(crypto) {
 function generateNewsItems(data) {
     let newsHtml = "";
     data.forEach(news => {
+        let trending = "balance";
+        if (news.sentiment > 0) {
+            trending = "trending-up";
+        } else if (news.sentiment < 0) {
+            trending = "trending-down";
+        }
         newsHtml += `
-        <a href="${news.content}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="${news.content}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">${news.source}</h5>
+                <h5 class="mb-1"><img src="/assets/${trending}.png" width="32" height="32" class="me-3">${news.source}</h5>
                 <small class="text-muted">${news.publishedAt}</small>
             </div>
             <p class="mb-1">${news.title}</p>
