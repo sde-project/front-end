@@ -108,7 +108,7 @@
                             <h5 class="card-title">Bitcoin - BTC</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@bitcoin">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@BTC">Show Graph</button>
                         </div>
                     </div>
                     <div class="card p-1">
@@ -117,7 +117,7 @@
                             <h5 class="card-title">Ethereum - ETH</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@ethereum">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@ETH">Show Graph</button>
                         </div>
                     </div>
                     <div class="card p-1">
@@ -126,7 +126,7 @@
                             <h5 class="card-title">Binance - BNB</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@binance">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@BNB">Show Graph</button>
                         </div>
                     </div>
                     <div class="card p-1">
@@ -135,7 +135,7 @@
                             <h5 class="card-title">Solana - SOL</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@solana">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@SOL">Show Graph</button>
                         </div>
                     </div>
                     <div class="card p-1">
@@ -144,7 +144,7 @@
                             <h5 class="card-title">Dogecoin - DOGE</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@doge">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@DOGE">Show Graph</button>
                         </div>
                     </div>
                 </div>
@@ -152,10 +152,10 @@
                     <div class="card p-1">
                         <img class="card-img-top p-5" src="/assets/proton.png" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Proton - XPR</h5>
+                            <h5 class="card-title">Proton - XRP</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@xpr">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@XRP">Show Graph</button>
                         </div>
                     </div>
                     <div class="card p-1">
@@ -164,7 +164,7 @@
                             <h5 class="card-title">Polkadot - DOT</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@polkadot">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@DOT">Show Graph</button>
                         </div>
                     </div>
                     <div class="card p-1">
@@ -173,7 +173,7 @@
                             <h5 class="card-title">Avalanche - AVAX</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@avalanche">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@AVAX">Show Graph</button>
                         </div>
                     </div>
                     <div class="card p-1">
@@ -182,7 +182,7 @@
                             <h5 class="card-title">Litecoin - LTC</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@litecoin">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@LTC">Show Graph</button>
                         </div>
                     </div>
                     <div class="card p-1">
@@ -191,7 +191,7 @@
                             <h5 class="card-title">Terra - LUNA</h5>
                             <p class="card-text">Lorem ipsum dolor sit amen</p>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cryptoModal" data-crypto="@luna">Show Graph</button>
+                                data-bs-target="#cryptoModal" data-crypto="@LUNA">Show Graph</button>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
 
     <div class="modal fade" id="cryptoModal" tabindex="-5" role="dialog" aria-labelledby="cryptoModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-fullscreen" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="cryptoModalLabel">Crypto</h5>
@@ -222,69 +222,15 @@
     <script type="module" src="/js/cloud_messaging.js"></script>
     <script type="module" src="/js/redirectNotLoggedIn.js"></script>
     <script type="module" src="/js/home.js"></script>
+    <script type="module" src="/js/graphs.js"></script>
 
-    <script>
-        var myChart;
-        $('#cryptoModal').on('hidden.bs.modal', function () {
-            myChart.destroy();
-        });
-
-        $('#cryptoModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var crypto = button.data('crypto') // Extract info from data-* attribute
-            var modal = $(this);
-            modal.find('#cryptoModalLabel').text(crypto + " chart");
-            // Graphs
-            var ctx = document.getElementById('myChart');
-            // eslint-disable-next-line no-unused-vars
-            myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [
-                        'Sunday',
-                        'Monday',
-                        'Tuesday',
-                        'Wednesday',
-                        'Thursday',
-                        'Friday',
-                        'Saturday'
-                    ],
-                    datasets: [{
-                        data: [
-                            15339,
-                            21345,
-                            18483,
-                            24003,
-                            23489,
-                            24092,
-                            12034
-                        ],
-                        lineTension: 0,
-                        backgroundColor: 'transparent',
-                        borderColor: '#007bff',
-                        borderWidth: 4,
-                        pointBackgroundColor: '#007bff'
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: false
-                            }
-                        }]
-                    },
-                    legend: {
-                        display: false
-                    }
-                }
-            });
-        })
-    </script>
     <script>feather.replace({ 'aria-hidden': 'true' })</script>
 
     <!-- CHART.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/1.2.2/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
 
 
 </body>
