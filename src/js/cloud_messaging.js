@@ -22,12 +22,12 @@ messaging.getToken({ vapidKey: 'BAw9DHrxvtsG52abLLvozOCuDBqeFxmyGFYDLwkeN7f_bRbg
     console.log("New token found! ", currentToken);
 
     const oldToken = window.localStorage.getItem('fcmToken');
-    if(oldToken != currentToken) {
+    if (oldToken != currentToken) {
       window.localStorage.setItem('fcmToken', currentToken);
       window.localStorage.setItem('fcmTokenSent', 'false');
     }
 
-    if(window.localStorage.getItem('loggedIn') == 'true') {
+    if (window.localStorage.getItem('loggedIn') == 'true') {
       sendFcmToken(currentToken).catch(err => console.log(err));
     }
 
