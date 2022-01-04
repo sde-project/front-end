@@ -12,3 +12,8 @@ services:
     restart: on-failure
     networks:
       - sde
+    volumes:
+      - type: bind
+        source: ./src
+        target: /usr/share/nginx/html
+

@@ -96,22 +96,42 @@
         <div class="container">
           <div class="main-body">
 
-            <div class="row gutters-sm">
+            <div class="container" id="loading">
+              <div class="w-100 d-flex justify-content-center align-items-center" id="loading" style="height: 380px;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  style="margin: auto; background: rgb(0, 0, 0, 0.0) none repeat scroll 0% 0%; display: block; shape-rendering: auto;"
+                  width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                  <path fill="none" stroke="#410d0c" stroke-width="8"
+                    stroke-dasharray="42.76482137044271 42.76482137044271"
+                    d="M24.3 30C11.4 30 5 43.3 5 50s6.4 20 19.3 20c19.3 0 32.1-40 51.4-40 C88.6 30 95 43.3 95 50s-6.4 20-19.3 20C56.4 70 43.6 30 24.3 30z"
+                    stroke-linecap="round" style="transform:scale(0.8);transform-origin:50px 50px">
+                    <animate attributeName="stroke-dashoffset" repeatCount="indefinite" dur="2s" keyTimes="0;1"
+                      values="0;256.58892822265625"></animate>
+                  </path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="row gutters-sm" style="display: none;" id="content">
               <div class="col-md-4 mb-3">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
                       <img src="/assets/user.png" alt="Admin" class="rounded-circle" width="150">
                       <div class="mt-3">
-                        <h4>Luca De Menego</h4>
-                        <p class="text-secondary mb-1">Do we have some details?</p>
-                        <button class="btn btn-primary">Follow</button>
-                        <button class="btn btn-outline-primary">Message</button>
+                        <h4 id="username"></h4>
+                        <p class="text-secondary mb-1" id="bio"></p>
+                        <!-- <button class="btn btn-primary">Follow</button> -->
                       </div>
+                    </div>
+                    <hr class="my-2">
+                    <div class="d-flex flex-column align-items-center text-center">
+                      <ul class="list-group list-group-flush" id="links"></ul>
                     </div>
                   </div>
                 </div>
-                <div class="card mt-3">
+
+                <!-- <div class="card mt-3">
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px"
@@ -128,7 +148,7 @@
                       <span class="text-secondary">username</span>
                     </li>
                   </ul>
-                </div>
+                </div> -->
               </div>
               <div class="col-md-8">
                 <div class="card mb-3">
@@ -137,18 +157,21 @@
                       <div class="col-sm-3">
                         <h6 class="mb-0">Full Name</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
-                        Luca De Menego
-                      </div>
+                      <div class="col-sm-9 text-secondary" id="fullname"></div>
                     </div>
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Email</h6>
+                        <h6 class="mb-0">Visibility</h6>
                       </div>
-                      <div class="col-sm-9 text-secondary">
-                        luca.demenego@studenti.unitn.it
+                      <div class="col-sm-9 text-secondary" id="public"></div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Cryptos</h6>
                       </div>
+                      <div class="col-sm-9 text-secondary" id="cryptos"></div>
                     </div>
                     <hr>
                     <div class="row">
@@ -164,24 +187,9 @@
                   <div class="col-sm-6 mb-3">
                     <div class="card h-100">
                       <div class="card-body">
-                        <h6 class="d-flex align-items-center mb-3">Favourite Cryptos</h6>
+                        <h6 class="d-flex align-items-center mb-3">Following (<span id="following_num"></span>)</h6>
                         <ul class="list-group"
-                          style="max-height: 30vh; overflow:scroll; -webkit-overflow-scrolling: touch;">
-                          <li class="list-group-item">Cras justo odio</li>
-                          <li class="list-group-item">Dapibus ac facilisis in</li>
-                          <li class="list-group-item">Morbi leo risus</li>
-                          <li class="list-group-item">Porta ac consectetur ac</li>
-                          <li class="list-group-item">Vestibulum at eros</li>
-                          <li class="list-group-item">Cras justo odio</li>
-                          <li class="list-group-item">Dapibus ac facilisis in</li>
-                          <li class="list-group-item">Morbi leo risus</li>
-                          <li class="list-group-item">Porta ac consectetur ac</li>
-                          <li class="list-group-item">Vestibulum at eros</li>
-                          <li class="list-group-item">Cras justo odio</li>
-                          <li class="list-group-item">Dapibus ac facilisis in</li>
-                          <li class="list-group-item">Morbi leo risus</li>
-                          <li class="list-group-item">Porta ac consectetur ac</li>
-                          <li class="list-group-item">Vestibulum at eros</li>
+                          style="max-height: 30vh; overflow:scroll; -webkit-overflow-scrolling: touch;" id="following">
                         </ul>
                       </div>
                     </div>
@@ -189,14 +197,14 @@
                   <div class="col-sm-6 mb-3">
                     <div class="card h-100">
                       <div class="card-body">
-                        <h6 class="d-flex align-items-center mb-3">Something else?</h6>
+                        <h6 class="d-flex align-items-center mb-3">Followers (<span id="followers_num"></span>)</h6>
+                        <ul class="list-group"
+                          style="max-height: 30vh; overflow:scroll; -webkit-overflow-scrolling: touch;" id="followers">
+                        </ul>
                       </div>
                     </div>
                   </div>
                 </div>
-
-
-
               </div>
             </div>
 
@@ -219,6 +227,7 @@
   <script type="module" src="/js/cloud_messaging.js"></script>
   <script type="module" src="/js/redirectNotLoggedIn.js"></script>
   <script type="module" src="/js/home.js"></script>
+  <script type="module" src="/js/profile.js"></script>
 
   <script>feather.replace({ 'aria-hidden': 'true' })</script>
 
