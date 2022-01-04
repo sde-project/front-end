@@ -15,7 +15,7 @@ $("#loginButton").click(() => {
 
 $("#googleButton").click(async () => {
 
-    const response = await http.get(`${config.users_api}/google/oauth?redirect_uri=${config.oauth_redirect_uri}`);
+    const response = await http.get(`/users/google/oauth?redirect_uri=${config.oauth_redirect_uri}`);
     if(response.status != 200) {
         return alert("There was an error getting Oauth URL from backend.");
     }

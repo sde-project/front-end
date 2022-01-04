@@ -21,7 +21,7 @@ $("#registerButton").click(async () => {
     }
 
     //check if email is available
-    let response = await http.get(`${config.users_api}/users/email/${email}`);
+    let response = await http.get(`/users/email/${email}`);
     if(response.status != 200) {
         button.show();
         spinner.hide();
@@ -35,7 +35,7 @@ $("#registerButton").click(async () => {
     }
 
     //check if username is available
-    response = await http.get(`${config.users_api}/users/username/${username}`);
+    response = await http.get(`/users/username/${username}`);
     if(response.status != 200) {
         button.show();
         spinner.hide();
@@ -59,7 +59,7 @@ $("#registerButton").click(async () => {
 
 $("#googleButton").click(async () => {
 
-    const response = await http.get(`${config.users_api}/google/oauth?redirect_uri=${config.oauth_redirect_uri}`);
+    const response = await http.get(`/users/google/oauth?redirect_uri=${config.oauth_redirect_uri}`);
     if(response.status != 200) {
         return alert("There was an error getting Oauth URL from backend.");
     }

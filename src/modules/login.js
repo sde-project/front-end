@@ -26,7 +26,7 @@ export function isLogged() {
 }
 
 export function login(email, password) {
-    return http.post(`${config.users_api}/users/login`, {
+    return http.post("/users/login", {
         email: email,
         password: password
     }).then(response => {
@@ -58,7 +58,7 @@ export function saveLoginToken(token) {
 }
 
 export function register(email, username, password) {
-    return http.post(`${config.users_api}/users/register`, {
+    return http.post("/users/register", {
         email: email,
         username: username,
         password: password
@@ -87,7 +87,7 @@ export function logout() {
 }
 
 export function showAuthWindow(options) {
-    options.windowName = options.windowName || 'ConnectWithOAuth'; // should not include space for IE
+    options.windowName = options.windowName || 'ConnectWithOAuth';
     options.windowOptions = options.windowOptions || 'location=0,status=0,width=600,height=800';
     options.callback = options.callback || function () { window.location.reload(); };
     const _oauthWindow = window.open(options.path, options.windowName, options.windowOptions);
