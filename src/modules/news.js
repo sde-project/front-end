@@ -1,8 +1,7 @@
-import config from './config.js';
 import http from './http.js';
 
 export function getLatestNews() {
-    return http.get(`${config.news_api}/latest`).then(response => {
+    return http.get(`/news/latest`).then(response => {
         if (response.status == 200) {
             return response.json().then(data => {
                 return generateNewsItems(data);
@@ -18,7 +17,7 @@ export function getLatestNews() {
 }
 
 export function getLatestCryptoNews(crypto) {
-    return http.get(`${config.news_api}/latest/crypto/${crypto}`).then(response => {
+    return http.get(`/news/latest/crypto/${crypto}`).then(response => {
         if (response.status == 200) {
             return response.json().then(data => {
                 return generateNewsItems(data);
