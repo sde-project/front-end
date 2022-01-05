@@ -49,7 +49,7 @@ $("#registerButton").click(async () => {
     }
 
     register(email, username, password).then(() => {
-        window.location.href = "/html/profile.html";
+        window.location.href = "/html/edit_profile.html";
     }).catch(error => {
         button.show();
         spinner.hide();
@@ -70,7 +70,7 @@ $("#googleButton").click(async () => {
         path: url,
         callback: function () {
             if(window.localStorage.getItem('loggedIn') == 'true') {
-                window.location.href = "/html/profile.html";
+                window.location.href = "/html/edit_profile.html";
             } else {
                 alert("There was an error logging in!");
             }
