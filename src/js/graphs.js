@@ -1,4 +1,36 @@
 import { getCryptoLatestGraph } from "../modules/graph.js";
+import http from "../modules/http.js";
+
+const likeSVG = `<span class="pe-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"> <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" /> </svg></span>`;
+
+$(document).ready(function() {
+    http.get("/users/me").then(async function (response) {
+        const user = await response.json();
+        const cryptos = user.cryptos;
+        cryptos.forEach(crypto => {
+            $(`#${crypto}-like`).removeClass("btn-outline-danger");
+            $(`#${crypto}-like`).addClass("btn-danger");
+            $(`#${crypto}-like`).html(`${likeSVG}Dislike`);
+        });
+    });
+});
+
+$(".like-button").click(function() {
+    const crypto = $(this).attr("data-crypto");
+    console.log(crypto);
+    const isLiked = $(this).hasClass('btn-danger');
+    if (isLiked) {
+        $(`#${crypto}-like`).removeClass("btn-danger");
+        $(`#${crypto}-like`).addClass("btn-outline-danger");
+        $(`#${crypto}-like`).html(`${likeSVG}Like`);
+        // TODO: remove crypto from favourites
+    } else {
+        $(`#${crypto}-like`).removeClass("btn-outline-danger");
+        $(`#${crypto}-like`).addClass("btn-danger");
+        $(`#${crypto}-like`).html(`${likeSVG}Dislike`);
+        // TODO: add crypto to favourites
+    }
+});
 
 var myChart;
 $('#cryptoModal').on('hidden.bs.modal', function () {
