@@ -98,7 +98,24 @@ export default class User {
         }
     }
 
-    async update() {
+    async fetch() {
+        const response = await http.get(`/users/id/${this._id}`);
+        if (response.status == 200) {
+            const user = await response.json();
+            this.username = user.username;
+            this.name = user.name;
+            this.bio = user.bio;
+            this.public = user.public;
+            this.cryptos = user.cryptos;
+            this.links = user.links;
+            return true;
+        } else {
+            const error = await response.json();
+            return error;
+        }
+    }
+
+    async save() {
 
         const response = await http.put(`/users/id/${this._id}`, {
             name: this.name,
