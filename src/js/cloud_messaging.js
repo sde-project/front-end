@@ -1,4 +1,5 @@
 import { sendFcmToken } from "../modules/cloud_messaging.js";
+import Toast from "../modules/toast.js";
 
 
 // Initialize the Firebase app in the service worker by passing in
@@ -39,4 +40,15 @@ messaging.getToken({ vapidKey: 'BAw9DHrxvtsG52abLLvozOCuDBqeFxmyGFYDLwkeN7f_bRbg
 }).catch((err) => {
   console.log('An error occurred while retrieving token. ', err);
   // ...
+});
+
+// Handle incoming messages. Called when:
+// - a message is received while the app has focus
+// - the user clicks on an app notification created by a service worker
+//   `messaging.onBackgroundMessage` handler.
+messaging.onMessage((payload) => {
+  console.log('Message received. ', payload);
+  if(payload.notification !== undefined) {
+    new Toast(payload.notification.title, payload.notification.body).show();
+  }
 });
