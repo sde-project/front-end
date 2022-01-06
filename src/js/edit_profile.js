@@ -55,7 +55,11 @@ async function fillLinks(user) {
 
     user.links.forEach((link, index) => {
 
-        const icon = "https://" + link.website.split("//")[1].split("/")[0] + "/favicon.ico";
+        let icon = null;
+
+        try {
+            icon = "https://" + link.website.split("//")[1].split("/")[0] + "/favicon.ico";
+        } catch(e) {}
 
         const li = $("<li>");
         li.addClass("list-group-item");
@@ -75,7 +79,7 @@ async function fillLinks(user) {
 
         const img = $("<img>");
         img.attr("height", "22px");
-        img.attr("src", icon);
+        img.attr("src", icon || "/assets/link.png");
         a.append(img);
 
         const span = $("<span>");
@@ -96,7 +100,7 @@ async function fillLinks(user) {
 }
 
 async function removeLink(index) {
-    user.links = user.links.splice(index, 1);
+    user.links = user.links.filter((_, i) => i !== index);
     
     if((await user.save()) === true) {
         await fillLinks(user);

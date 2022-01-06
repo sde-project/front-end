@@ -29,8 +29,8 @@
       data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100" type="text" style="text-align: center;"
-      placeholder="Your personal Crypto Currencies Dashboard" readonly>
+    <input class="form-control w-100" type="text" style="text-align: center;" placeholder="Search for a user..."
+      id="user-search-bar">
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
         <button id="logout" type="button" class="btn btn-dark">Log out</button>
@@ -128,7 +128,8 @@
                       <div>
                         <ul class="list-group list-group-flush" id="links"></ul>
                       </div>
-                      <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#add_link_modal">Add a link</button>
+                      <button class="btn btn-outline-success" data-bs-toggle="modal"
+                        data-bs-target="#add_link_modal">Add a link</button>
                     </span>
                   </div>
                 </div>
@@ -170,7 +171,8 @@
     </div>
   </div>
 
-  <div class="modal fade" id="add_link_modal" tabindex="-1" role="dialog" aria-labelledby="add_link_modal_label" aria-hidden="true">
+  <div class="modal fade" id="add_link_modal" tabindex="-1" role="dialog" aria-labelledby="add_link_modal_label"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -209,6 +211,8 @@
     crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+  <script type="module" src="/js/autocomplete.min.js"></script>
+  <script type="module" src="/js/user_search.js"></script>
   <script type="module" src="/js/cloud_messaging.js"></script>
   <script type="module" src="/js/redirectNotLoggedIn.js"></script>
   <script type="module" src="/js/home.js"></script>
