@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CryptoDashboard</title>
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <link href="/css/switch.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 15vw;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/index.html">CryptoDashboard</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <input class="form-control w-100" type="text" style="text-align: center;" placeholder="Search for a user..."
+            id="user-search-bar">
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <button id="logout" type="button" class="btn btn-dark">Log out</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <h6
+                            class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Information</span>
+                        </h6>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/index.html">
+                                <span data-feather="airplay"></span>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/html/exchanges.html">
+                                <span data-feather="dollar-sign"></span>
+                                Exchanges
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/html/news.html">
+                                <span data-feather="bookmark"></span>
+                                Latest News
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/html/graphs.html">
+                                <span data-feather="bar-chart-2"></span>
+                                Graphs
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>User</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/html/profile.html">
+                                <span data-feather="user"></span>
+                                My Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="settings"></span>
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4 mb-4">
+                <div class="row">
+                    <div class="card-group">
+                        <div class="card p-1">
+                            <img class="card-img-top p-5" src="/assets/kraken.png" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Kraken</h5>
+                                <h6 class="card-subtitle"><a class="card-link"
+                                        href="https://www.kraken.com">www.kraken.com</a></h6>
+                                <p class="card-text mt-3">Supports:</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" id="btc-kraken">BTC</li>
+                                    <li class="list-group-item" id="eth-kraken">ETH</li>
+                                    <li class="list-group-item" id="doge-kraken">DOGE</li>
+                                    <li class="list-group-item" id="ltc-kraken">LTC</li>
+                                    <li class="list-group-item" id="sol-kraken">SOL</li>
+                                    <li class="list-group-item" id="xrp-kraken">XRP</li>
+                                    <li class="list-group-item" id="dot-kraken">DOT</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card p-1">
+                            <img class="card-img-top p-5" src="/assets/coinbase.png" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Coinbase</h5>
+                                <h6 class="card-subtitle"><a class="card-link"
+                                        href="https://www.coinbase.com">www.coinbase.com</a></h6>
+                                <p class="card-text mt-3">Supports:</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" id="btc-coinbase">BTC</li>
+                                    <li class="list-group-item" id="eth-coinbase">ETH</li>
+                                    <li class="list-group-item" id="doge-coinbase">DOGE</li>
+                                    <li class="list-group-item" id="ltc-coinbase">LTC</li>
+                                    <li class="list-group-item" id="sol-coinbase">SOL</li>
+                                    <li class="list-group-item" id="avax-coinbase">AVAX</li>
+                                    <li class="list-group-item" id="dot-coinbase">DOT</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="card p-1">
+                            <img class="card-img-top p-5" src="/assets/binance.png" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Binance</h5>
+                                <h6 class="card-subtitle"><a class="card-link"
+                                        href="https://www.binance.com">www.binance.com</a></h6>
+                                <p class="card-text mt-3">Supports:</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" id="btc-binance">BTC</li>
+                                    <li class="list-group-item" id="eth-binance">ETH</li>
+                                    <li class="list-group-item" id="doge-binance">DOGE</li>
+                                    <li class="list-group-item" id="ltc-binance">LTC</li>
+                                    <li class="list-group-item" id="sol-binance">SOL</li>
+                                    <li class="list-group-item" id="avax-binance">AVAX</li>
+                                    <li class="list-group-item" id="xrp-binance">XRP</li>
+                                    <li class="list-group-item" id="dot-binance">DOT</li>
+                                    <li class="list-group-item" id="luna-binance">LUNA</li>
+                                    <li class="list-group-item" id="bnb-binance">BNB</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="card p-1">
+                            <img class="card-img-top p-5" src="/assets/ftx.png" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">FTX</h5>
+                                <h6 class="card-subtitle"><a class="card-link"
+                                        href="https://www.ftx.com">www.ftx.com</a></h6>
+                                <p class="card-text mt-3">Supports:</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" id="btc-ftx">BTC</li>
+                                    <li class="list-group-item" id="eth-ftx">ETH</li>
+                                    <li class="list-group-item" id="doge-ftx">DOGE</li>
+                                    <li class="list-group-item" id="ltc-ftx">LTC</li>
+                                    <li class="list-group-item" id="sol-ftx">SOL</li>
+                                    <li class="list-group-item" id="avax-ftx">AVAX</li>
+                                    <li class="list-group-item" id="xrp-ftx">XRP</li>
+                                    <li class="list-group-item" id="dot-ftx">DOT</li>
+                                    <li class="list-group-item" id="bnb-ftx">BNB</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="card p-1">
+                            <img class="card-img-top p-5" src="/assets/crypto.png" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Crypto.com</h5>
+                                <h6 class="card-subtitle"><a class="card-link"
+                                        href="https://www.crypto.com">www.crypto.com</a></h6>
+                                <p class="card-text mt-3">Supports:</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item" id="btc-crypto">BTC</li>
+                                    <li class="list-group-item" id="eth-crypto">ETH</li>
+                                    <li class="list-group-item" id="doge-crypto">DOGE</li>
+                                    <li class="list-group-item" id="ltc-crypto">LTC</li>
+                                    <li class="list-group-item" id="sol-crypto">SOL</li>
+                                    <li class="list-group-item" id="avax-crypto">AVAX</li>
+                                    <li class="list-group-item" id="xrp-crypto">XRP</li>
+                                    <li class="list-group-item" id="dot-crypto">DOT</li>
+                                    <li class="list-group-item" id="luna-crypto">LUNA</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+                integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+                crossorigin="anonymous"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+            <script type="module" src="/js/autocomplete.min.js"></script>
+            <script type="module" src="/js/user_search.js"></script>
+            <script type="module" src="/js/redirectNotLoggedIn.js"></script>
+            <script type="module" src="/js/home.js"></script>
+
+            <script>feather.replace({ 'aria-hidden': 'true' })</script>
+
+</body>
+
+</html>
