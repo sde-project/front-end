@@ -1,6 +1,5 @@
 import { getCryptoLatestGraph } from "../modules/graph.js";
 import User from "../modules/user.js";
-import http from "../modules/http.js";
 
 const likeSVG = `<span class="pe-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"> <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" /> </svg></span>`;
 
@@ -37,8 +36,9 @@ $(".like-button").click(async function() {
     await user.save();
 });
 
+
 var myChart;
-$('#cryptoModal').on('hidden.bs.modal', function () {
+function destroyChartAddLoading() {
     myChart.destroy();
     $('#myChart').remove();
     $('#loading-container').html(`
@@ -57,21 +57,14 @@ $('#cryptoModal').on('hidden.bs.modal', function () {
         </svg>
     </div>
     `);
-});
+}
 
-$('#cryptoModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var crypto = button.data('crypto') // Extract info from data-* attribute
-    var modal = $(this);
-    modal.find('#cryptoModalLabel').text(crypto + " chart");
-    
-    // Generate graph
-    // var ctx = document.getElementById('myChart');
-    getCryptoLatestGraph(crypto.replaceAll('@', ''))
+function generateGraph(crypto, operation) {        
+    getCryptoLatestGraph(crypto, operation)
         .then(res => {
             $('.loader').get(0).remove();
             var newCanvas = $('<canvas/>',{
-                class:'my-4 w-100',
+                class:'my-0 w-100',
                 id: 'myChart'               
             });
             $('#canvas').append(newCanvas);
@@ -82,5 +75,40 @@ $('#cryptoModal').on('show.bs.modal', function (event) {
                 });
             }
             myChart = new Chart(ctx, res);
-        })
+            $('input:checkbox').removeAttr("disabled");
+        });
+}
+
+$('#cryptoModal').on('hidden.bs.modal', destroyChartAddLoading);
+
+$('input:checkbox').change(
+function() {
+    if ($(this).is(':checked')) {
+        // Buy
+        $(this).attr("disabled", true);
+        destroyChartAddLoading();
+        var modal = $('#cryptoModal');
+        var crypto = modal.find('#cryptoModalLabel').text();
+        crypto = crypto.split(' ')[0];
+        generateGraph(crypto.replaceAll('@', ''), 'buy');
+    } else {
+        // Sell
+        $(this).attr("disabled", true);
+        destroyChartAddLoading();
+        var modal = $('#cryptoModal');
+        var crypto = modal.find('#cryptoModalLabel').text();
+        crypto = crypto.split(' ')[0];
+        generateGraph(crypto.replaceAll('@', ''), 'sell');
+    }
+});
+
+$('#cryptoModal').on('show.bs.modal', function (event) {
+    $('input:checkbox').attr("disabled", true);
+
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var crypto = button.data('crypto') // Extract info from data-* attribute
+    var modal = $(this);
+    modal.find('#cryptoModalLabel').text(crypto + " chart");
+    
+    generateGraph(crypto.replaceAll('@', ''), 'buy');
 })
