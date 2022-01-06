@@ -14,7 +14,8 @@ $(document).ready(function() {
         console.log(user.cryptos);
         
         if (user.cryptos.length > 0) {
-            getCryptoLatestGraph(user.cryptos[0])
+            $('#trending-favourite').text(`Trending Favourite: ${user.cryptos[0]}`)
+            getCryptoLatestGraph(user.cryptos[0], 'buy')
                 .then(res => {
                         $('#loading').remove();
                         var newCanvas = $('<canvas/>',{
@@ -31,7 +32,7 @@ $(document).ready(function() {
                         myChart = new Chart(ctx, res);
                     });
         } else {
-            getCryptoLatestGraph("BTC")
+            getCryptoLatestGraph("BTC", 'buy')
                 .then(res => {
                         $('#loading').remove();
                         var newCanvas = $('<canvas/>',{
