@@ -18,6 +18,14 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 8vw;
+            object-fit: contain;
+        }
+    </style>
 </head>
 
 <body>
@@ -101,7 +109,11 @@
                 </div>
 
                 <h2>Your favourite Cryptos</h2>
-                <p>Qui mettiamo qualcosa per le crypto preferite</p>
+                <div class="container-fluid mt-3 mb-3" id="exchanges-container">
+                    <div class="row row-cols-4" id="exchanges-dashboard">
+
+                    </div>
+                </div>
 
                 <h2 id="trending-favourite">Trending Favourite Crypto</h2>
                 <small class="text-muted">Seeing 'buy' graph. Get all info <a href="/html/graphs.html" class="link-info">here</a></small>
