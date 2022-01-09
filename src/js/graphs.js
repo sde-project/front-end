@@ -24,7 +24,7 @@ $(".like-button").click(async function() {
         $(`#${crypto}-like`).addClass("btn-outline-danger");
         $(`#${crypto}-like`).html(`${likeSVG}Like`);
         
-        user.crypto = user.cryptos.filter(c => c !== crypto);
+        user.cryptos = user.cryptos.filter(c => c !== crypto);
     } else {
         $(`#${crypto}-like`).removeClass("btn-outline-danger");
         $(`#${crypto}-like`).addClass("btn-danger");
